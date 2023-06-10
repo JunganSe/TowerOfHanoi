@@ -1,4 +1,5 @@
-﻿using TowerOfHanoi.Core.GameComponents;
+﻿using TowerOfHanoi.Core.Enums;
+using TowerOfHanoi.Core.GameComponents;
 using TowerOfHanoi.Core.Interfaces;
 
 namespace TowerOfHanoi.Core;
@@ -6,8 +7,9 @@ namespace TowerOfHanoi.Core;
 public class Game
 {
     private readonly IIOHandler _ioHandler;
-    private bool _restart = true;
-    private bool _keepLooping = true;
+    private bool _restart;
+    private bool _keepLooping;
+    private Stack<TowerPiece>? _targetTower = null;
 
     public Towers Towers { get; set; } = new();
     public Messages Messages { get; private set; } = new();
@@ -18,6 +20,8 @@ public class Game
     public Game(IIOHandler ioHandler)
     {
         _ioHandler = ioHandler;
+        _restart = true;
+        _keepLooping = true;
     }
 
 
@@ -42,7 +46,7 @@ public class Game
     private void SelectDifficulty()
     {
         string message = "Select Difficulty:\n" +
-            "1. Ridiculusly easy\n" +
+            "1. Child's play\n" +
             "2. Easy\n" +
             "3. Medium\n" +
             "4. Hard\n" +
@@ -82,12 +86,56 @@ public class Game
         // - Kontrollera att våning kan läggas ner.
         //   - Om inte, meddela och lägg tillbaka våning. Börja om.
         // - Lägg ner våning.
+
+        Messages.Instruction = "Select tower to take from.";
+        // TODO: Uppdatera skärmen så meddelandet syns.
+        var command = _ioHandler.GetInputCommand();
+        if (HandleEscapeInput(command))
+            return;
+        if (HandleTakeInput(command))
+        {
+
+        }
+        
     }
 
-    private void HandleInput()
+    private bool HandleEscapeInput(InputCommand command)
     {
-        // - Hämta input.
-        // - Kolla och hantera om användaren vill avsluta eller börja om.
+        switch (command)
+        {
+            case InputCommand.Restart:
+                _keepLooping = false;
+                _restart = true;
+                return true;
+            case InputCommand.Quit:
+                _keepLooping = false;
+                _restart = false;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private bool HandleTakeInput(InputCommand command)
+    {
+        return command switch
+        {
+            InputCommand.TowerLeft => TryTargetTower(Towers.Left),
+            InputCommand.TowerMiddle => TryTargetTower(Towers.Middle),
+            InputCommand.TowerRight => TryTargetTower(Towers.Right),
+            _ => false
+        };
+    }
+
+    private bool TryTargetTower(Stack<TowerPiece> tower)
+    {
+        if (tower.Count > 0)
+        {
+            _targetTower = tower;
+            return true;
+        }
+        _targetTower = null;
+        return false;
     }
 
     private void CheckFinish()
