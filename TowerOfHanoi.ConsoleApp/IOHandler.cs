@@ -40,6 +40,11 @@ public class IOHandler : IIOHandler
 
 
 
+    public void ClearScreen()
+    {
+        Console.Clear();
+    }
+
     public void DrawScreen()
     {
         _drawHandler.DrawScreen();
