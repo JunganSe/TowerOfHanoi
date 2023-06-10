@@ -1,0 +1,96 @@
+﻿using TowerOfHanoi.Core.GameComponents;
+using TowerOfHanoi.Core.Interfaces;
+
+namespace TowerOfHanoi.Core;
+
+public class Game
+{
+    private readonly IIOHandler _ioHandler;
+    private bool _restart = true;
+    private bool _keepLooping = true;
+
+    public Towers Towers { get; set; } = new();
+    public Messages Messages { get; private set; } = new();
+    public int Difficulty { get; private set; }
+    public int Moves { get; private set; }
+
+    public Game(IIOHandler ioHandler)
+    {
+        _ioHandler = ioHandler;
+    }
+
+
+
+    public void Run()
+    {
+        while (_restart)
+        {
+            SelectDifficulty();
+            Initialize();
+            while (_keepLooping)
+            {
+                MainLoop();
+                CheckFinish();
+            }
+            Finish();
+        }
+        Quit();
+    }
+
+    private void SelectDifficulty()
+    {
+        // - Visa alternativ.
+        // - Ta input.
+        // - Ställ svårighetsgrad. (3-7)
+    }
+
+    private void Initialize()
+    {
+        _keepLooping = true;
+        // - Återställ våningar.
+        // - Rensa meddelanden.
+        // - Nollställ poäng.
+    }
+
+    private void MainLoop()
+    {
+        // - Uppdatera meddelande.
+        // - Ta input för att plocka upp våning. (Och restart/quit)
+        // - Kontrollera att våning kan plockas upp.
+        //   - Om inte, meddela och ta input igen.
+        // - Markera vald våning.
+        // - Uppdatera meddelande.
+        // - Ta input för att lägga ner våning. (Och restart/quit)
+        // - Kontrollera att våning kan läggas ner.
+        //   - Om inte, meddela och lägg tillbaka våning. Börja om.
+        // - Lägg ner våning.
+    }
+
+    private void HandleInput()
+    {
+        // - Hämta input.
+        // - Kolla och hantera om användaren vill avsluta eller börja om.
+    }
+
+    private void CheckFinish()
+    {
+        // - Kolla om alla våningar är på högra sidan.
+    }
+
+    private void Finish()
+    {
+        // - Beräkna bästa möjliga poäng för svårighetsgraden.
+        // - Meddela hur det gick.
+        // - Fråga: Börja om eller avsluta.
+    }
+
+    private void Restart()
+    {
+        // - Börja om med att välja svårighetsgrad.
+    }
+
+    private void Quit()
+    {
+        // Stäng ner spelet genom att anropa metod i ui-appen?
+    }
+}
