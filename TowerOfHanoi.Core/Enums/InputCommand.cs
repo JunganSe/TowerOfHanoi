@@ -3,9 +3,9 @@
 public enum InputCommand
 {
     None,
-    Stack1,
-    Stack2,
-    Stack3,
+    TowerLeft,
+    TowerMiddle,
+    TowerRight,
     Restart,
     Quit
 }

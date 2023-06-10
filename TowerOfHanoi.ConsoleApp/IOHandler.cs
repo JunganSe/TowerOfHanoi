@@ -30,9 +30,9 @@ public class IOHandler : IIOHandler
     {
         return key switch
         {
-            ConsoleKey.NumPad1 => InputCommand.Stack1,
-            ConsoleKey.NumPad2 => InputCommand.Stack2,
-            ConsoleKey.NumPad3 => InputCommand.Stack3,
+            ConsoleKey.A => InputCommand.TowerLeft,
+            ConsoleKey.S => InputCommand.TowerMiddle,
+            ConsoleKey.D => InputCommand.TowerRight,
             ConsoleKey.R => InputCommand.Restart,
             ConsoleKey.Q => InputCommand.Quit,
             _ => InputCommand.None
