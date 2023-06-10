@@ -63,10 +63,11 @@ public class Game
 
     private void Initialize()
     {
+        _ioHandler.ClearScreen();
+        Towers.Initialize(TowerHeight);
+        Messages.Clear();
+        Moves = 0;
         _keepLooping = true;
-        // - Återställ våningar.
-        // - Rensa meddelanden.
-        // - Nollställ poäng.
     }
 
     private void MainLoop()
