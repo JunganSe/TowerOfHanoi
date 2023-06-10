@@ -4,7 +4,7 @@ namespace TowerOfHanoi.Core.Interfaces;
 
 public interface IIOHandler
 {
-    public InputCommand GetInput();
+    public InputCommand GetInputCommand();
     public void DrawScreen();
     public void PrintMessage(string message);
 }

@@ -12,7 +12,7 @@ public class IOHandler : IIOHandler
         _drawHandler = drawHandler;
     }
 
-    public InputCommand GetInput()
+    public InputCommand GetInputCommand()
     {
         var key = GetUserInput();
         return MapConsoleKeyToInputCommand(key);
@@ -20,10 +20,7 @@ public class IOHandler : IIOHandler
 
     private ConsoleKey GetUserInput()
     {
-        ConsoleKey key = ConsoleKey.NoName;
-        while (Console.KeyAvailable)
-            key = Console.ReadKey(true).Key;
-        return key;
+        return Console.ReadKey(true).Key;
     }
 
     private InputCommand MapConsoleKeyToInputCommand(ConsoleKey key)
