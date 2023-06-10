@@ -12,6 +12,13 @@ public class IOHandler : IIOHandler
         _drawHandler = drawHandler;
     }
 
+
+
+    public char GetInputChar()
+    {
+        return Console.ReadKey(true).KeyChar;
+    }
+
     public InputCommand GetInputCommand()
     {
         var key = Console.ReadKey(true).Key;
