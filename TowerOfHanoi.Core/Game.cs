@@ -12,6 +12,7 @@ public class Game
     public Towers Towers { get; set; } = new();
     public Messages Messages { get; private set; } = new();
     public int Difficulty { get; private set; }
+    public int TowerHeight { get; set; }
     public int Moves { get; private set; }
 
     public Game(IIOHandler ioHandler)
@@ -39,9 +40,24 @@ public class Game
 
     private void SelectDifficulty()
     {
-        // - Visa alternativ.
-        // - Ta input.
-        // - Ställ svårighetsgrad. (3-7)
+        string message = "Select Difficulty:\n" +
+            "1. Ridiculusly easy\n" +
+            "2. Easy\n" +
+            "3. Medium\n" +
+            "4. Hard\n" +
+            "5. Kinda tedious";
+        _ioHandler.PrintMessage(message);
+        while (true)
+        {
+            var input = _ioHandler.GetInputChar().ToString();
+            if (int.TryParse(input, out int parsed)
+                && (parsed is >= 1 and <= 5))
+            {
+                Difficulty = parsed;
+                TowerHeight = parsed + 2;
+                break;
+            }
+        }
     }
 
     private void Initialize()
