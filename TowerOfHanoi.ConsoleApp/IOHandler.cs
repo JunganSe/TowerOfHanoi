@@ -14,13 +14,8 @@ public class IOHandler : IIOHandler
 
     public InputCommand GetInputCommand()
     {
-        var key = GetUserInput();
+        var key = Console.ReadKey(true).Key;
         return MapConsoleKeyToInputCommand(key);
-    }
-
-    private ConsoleKey GetUserInput()
-    {
-        return Console.ReadKey(true).Key;
     }
 
     private InputCommand MapConsoleKeyToInputCommand(ConsoleKey key)
