@@ -5,6 +5,13 @@ namespace TowerOfHanoi.ConsoleApp;
 
 public class IOHandler : IIOHandler
 {
+    private readonly DrawHandler _drawHandler;
+
+    public IOHandler(DrawHandler drawHandler)
+    {
+        _drawHandler = drawHandler;
+    }
+
     public InputCommand GetInput()
     {
         var key = GetUserInput();
@@ -30,5 +37,12 @@ public class IOHandler : IIOHandler
             ConsoleKey.Q => InputCommand.Quit,
             _ => InputCommand.None
         };
+    }
+
+
+
+    public void DrawScreen()
+    {
+        _drawHandler.DrawScreen();
     }
 }
