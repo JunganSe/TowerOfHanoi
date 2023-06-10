@@ -45,4 +45,9 @@ public class IOHandler : IIOHandler
     {
         _drawHandler.DrawScreen();
     }
+
+    public void PrintMessage(string message)
+    {
+        Console.WriteLine(message);
+    }
 }

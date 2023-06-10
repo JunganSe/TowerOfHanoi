@@ -6,4 +6,5 @@ public interface IIOHandler
 {
     public InputCommand GetInput();
     public void DrawScreen();
+    public void PrintMessage(string message);
 }
