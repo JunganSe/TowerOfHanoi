@@ -26,6 +26,7 @@ public class Game
     {
         while (_restart)
         {
+            _ioHandler.ClearScreen();
             SelectDifficulty();
             Initialize();
             while (_keepLooping)
