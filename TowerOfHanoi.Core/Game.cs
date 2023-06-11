@@ -131,7 +131,7 @@ public class Game
 
     private bool TryTargetTower(Tower tower)
     {
-        if (tower.Count > 0)
+        if (tower.HasContent)
         {
             _targetTower = tower;
             return true;
