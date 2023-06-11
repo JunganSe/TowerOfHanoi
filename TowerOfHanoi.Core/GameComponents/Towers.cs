@@ -2,11 +2,11 @@
 
 public class Towers
 {
-    public Stack<TowerPiece> Left { get; private set; } = new();
-    public Stack<TowerPiece> Middle { get; private set; } = new();
-    public Stack<TowerPiece> Right { get; private set; } = new();
+    public Tower Left { get; private set; } = new();
+    public Tower Middle { get; private set; } = new();
+    public Tower Right { get; private set; } = new();
 
-    public void Clear()
+    public void ClearAll()
     {
         Left.Clear();
         Middle.Clear();
@@ -15,7 +15,7 @@ public class Towers
 
     public void Initialize(int height)
     {
-        Clear();
+        ClearAll();
         for (int size = height; size > 0; size--)
             Left.Push(new TowerPiece(size));
     }

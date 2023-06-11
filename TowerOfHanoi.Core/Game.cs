@@ -9,7 +9,7 @@ public class Game
     private readonly IIOHandler _ioHandler;
     private bool _restart;
     private bool _keepLooping;
-    private Stack<TowerPiece>? _targetTower = null;
+    private Tower? _targetTower = null;
 
     public Towers Towers { get; set; } = new();
     public Messages Messages { get; private set; } = new();
@@ -127,7 +127,7 @@ public class Game
         };
     }
 
-    private bool TryTargetTower(Stack<TowerPiece> tower)
+    private bool TryTargetTower(Tower tower)
     {
         if (tower.Count > 0)
         {
