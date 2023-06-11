@@ -10,6 +10,7 @@ public class Game
     private bool _restart;
     private bool _keepLooping;
     private Tower? _targetTower = null;
+    private GameState _state = GameState.None;
 
     public Towers Towers { get; set; } = new();
     public Messages Messages { get; private set; } = new();
@@ -72,6 +73,7 @@ public class Game
         Messages.Clear();
         Moves = 0;
         _keepLooping = true;
+        _state = GameState.Take;
     }
 
     private void MainLoop()
