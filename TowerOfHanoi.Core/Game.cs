@@ -4,7 +4,7 @@ using TowerOfHanoi.Core.Interfaces;
 
 namespace TowerOfHanoi.Core;
 
-public class Game
+public partial class Game
 {
     private readonly IIOHandler _ioHandler;
     private bool _restart;
@@ -44,38 +44,6 @@ public class Game
         Quit();
     }
 
-    private void SelectDifficulty()
-    {
-        string message = "Select Difficulty:\n" +
-            "1. Child's play\n" +
-            "2. Easy\n" +
-            "3. Medium\n" +
-            "4. Hard\n" +
-            "5. Kinda tedious";
-        _ioHandler.PrintMessage(message);
-        while (true)
-        {
-            var input = _ioHandler.GetInputChar().ToString();
-            if (int.TryParse(input, out int parsed)
-                && (parsed is >= 1 and <= 5))
-            {
-                Difficulty = parsed;
-                TowerHeight = parsed + 2;
-                break;
-            }
-        }
-    }
-
-    private void Initialize()
-    {
-        _ioHandler.ClearScreen();
-        Towers.Initialize(TowerHeight);
-        Messages.Clear();
-        Moves = 0;
-        _keepLooping = true;
-        _state = GameState.Take;
-    }
-
     private void MainLoop()
     {
         // - Uppdatera meddelande.
@@ -99,57 +67,6 @@ public class Game
 
         }
         
-    }
-
-    private bool HandleEscapeInput(InputCommand command)
-    {
-        switch (command)
-        {
-            case InputCommand.Restart:
-                _keepLooping = false;
-                _restart = true;
-                return true;
-            case InputCommand.Quit:
-                _keepLooping = false;
-                _restart = false;
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    private bool HandleTakeInput(InputCommand command)
-    {
-        return command switch
-        {
-            InputCommand.TowerLeft => TryTargetTower(Towers.Left),
-            InputCommand.TowerMiddle => TryTargetTower(Towers.Middle),
-            InputCommand.TowerRight => TryTargetTower(Towers.Right),
-            _ => false
-        };
-    }
-
-    private bool TryTargetTower(Tower tower)
-    {
-        if (tower.HasContent)
-        {
-            _targetTower = tower;
-            return true;
-        }
-        _targetTower = null;
-        return false;
-    }
-
-    private void CheckFinish()
-    {
-        // - Kolla om alla våningar är på högra sidan.
-    }
-
-    private void Finish()
-    {
-        // - Beräkna bästa möjliga poäng för svårighetsgraden.
-        // - Meddela hur det gick.
-        // - Fråga: Börja om eller avsluta.
     }
 
     private void Restart()
