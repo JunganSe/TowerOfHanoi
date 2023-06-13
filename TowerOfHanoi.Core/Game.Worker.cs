@@ -37,17 +37,6 @@ public partial class Game
         _state = GameState.Take;
     }
 
-    private bool TryTargetTower(Tower tower)
-    {
-        if (tower.HasContent)
-        {
-            _targetTower = tower;
-            return true;
-        }
-        _targetTower = null;
-        return false;
-    }
-
     private void CheckFinish()
     {
         // - Kolla om alla våningar är på högra sidan.
