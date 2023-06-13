@@ -46,27 +46,43 @@ public partial class Game
 
     private void MainLoop()
     {
-        // - Uppdatera meddelande.
-        // - Ta input för att plocka upp våning. (Och restart/quit)
-        // - Kontrollera att våning kan plockas upp.
-        //   - Om inte, meddela och ta input igen.
-        // - Markera vald våning.
-        // - Uppdatera meddelande.
-        // - Ta input för att lägga ner våning. (Och restart/quit)
-        // - Kontrollera att våning kan läggas ner.
-        //   - Om inte, meddela och lägg tillbaka våning. Börja om.
-        // - Lägg ner våning.
+        // TODO: Uppdatera allt på skärmen.
+        Messages.Clear();
 
-        Messages.Instruction = "Select tower to take from.";
-        // TODO: Uppdatera skärmen så meddelandet syns.
-        var command = _ioHandler.GetInputCommand();
-        if (HandleEscapeInput(command))
-            return;
-        if (HandleTakeInput(command))
+        if (_state == GameState.Take)
         {
+            Towers.ClearHighlights();
+            Messages.Instruction = "Select tower to take from.";
+            // TODO: Uppdatera visning av meddelande.
 
+            var command = _ioHandler.GetInputCommand();
+            if (HandleEscapeInput(command))
+                return;
+            _targetTower = MapCommandToTower(command);
+
+            if (_targetTower == null)
+            {
+                Messages.Status = "Unknown command, try again.";
+                return;
+            }
+            if (!_targetTower.HasContent)
+            {
+                Messages.Status = "Can not take from empty tower.";
+                return;
+            }
+
+            Messages.Status = $"Taking from {_targetTower.Name} tower.";
+            Towers.Highlight(_targetTower);
+            _state = GameState.Place;
         }
-        
+
+        if (_state == GameState.Place)
+        {
+            // - Ta input för att lägga ner våning. (Och restart/quit)
+            // - Kontrollera att våning kan läggas ner.
+            //   - Om inte, meddela och släpp target. Börja om.
+            // - Lägg ner våning.
+        }
     }
 
     private void Restart()
