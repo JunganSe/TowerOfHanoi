@@ -2,21 +2,35 @@
 
 public class Towers
 {
-    public Tower Left { get; private set; } = new();
-    public Tower Middle { get; private set; } = new();
-    public Tower Right { get; private set; } = new();
+    public Tower Left { get; private set; }
+    public Tower Middle { get; private set; }
+    public Tower Right { get; private set; }
 
-    public void ClearAll()
+    public Towers()
     {
-        Left.Clear();
-        Middle.Clear();
-        Right.Clear();
+        Left = new() { Name = "Left"};
+        Middle = new() { Name = "Middle" };
+        Right = new() { Name = "Right" };
     }
 
     public void Initialize(int height)
     {
-        ClearAll();
+        Left.Clear();
+        Middle.Clear();
+        Right.Clear();
         for (int size = height; size > 0; size--)
             Left.Push(new TowerPiece(size));
+    }
+
+    public void Highlight(Tower tower)
+    {
+        tower.Highlight = true;
+    }
+
+    public void ClearHighlights()
+    {
+        Left.Highlight = false;
+        Middle.Highlight = false;
+        Right.Highlight = false;
     }
 }

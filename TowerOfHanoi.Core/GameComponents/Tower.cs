@@ -4,6 +4,8 @@ public class Tower
 {
     private readonly Stack<TowerPiece> _pieces = new();
 
+    public string Name { get; init; } = "";
+    public bool Highlight { get; set; } = false;
     public int Count => _pieces.Count;
     public bool HasContent => _pieces.Any();
 
