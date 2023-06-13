@@ -1,4 +1,5 @@
 ﻿using TowerOfHanoi.Core.Enums;
+using TowerOfHanoi.Core.GameComponents;
 
 namespace TowerOfHanoi.Core;
 
@@ -21,14 +22,14 @@ public partial class Game
         }
     }
 
-    private bool HandleTakeInput(InputCommand command)
+    private Tower? MapCommandToTargetTower(InputCommand command)
     {
         return command switch
         {
-            InputCommand.TowerLeft => TryTargetTower(Towers.Left),
-            InputCommand.TowerMiddle => TryTargetTower(Towers.Middle),
-            InputCommand.TowerRight => TryTargetTower(Towers.Right),
-            _ => false
+            InputCommand.TowerLeft => Towers.Left,
+            InputCommand.TowerMiddle => Towers.Middle,
+            InputCommand.TowerRight => Towers.Right,
+            _ => null
         };
     }
 }
