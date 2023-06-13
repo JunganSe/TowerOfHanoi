@@ -22,7 +22,7 @@ public partial class Game
         }
     }
 
-    private Tower? MapCommandToTargetTower(InputCommand command)
+    private Tower? MapCommandToTower(InputCommand command)
     {
         return command switch
         {
