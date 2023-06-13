@@ -2,15 +2,20 @@
 
 public class Towers
 {
-    public Tower Left { get; private set; }
-    public Tower Middle { get; private set; }
-    public Tower Right { get; private set; }
+    private readonly List<Tower> _towers;
+
+    public Tower Left => _towers[0];
+    public Tower Middle => _towers[1];
+    public Tower Right => _towers[2];
 
     public Towers()
     {
-        Left = new() { Name = "Left"};
-        Middle = new() { Name = "Middle" };
-        Right = new() { Name = "Right" };
+        _towers = new List<Tower>()
+        {
+            new() { Name = "Left"},
+            new() { Name = "Middle"},
+            new() { Name = "Right"},
+        };
     }
 
     public void Initialize(int height)
@@ -29,8 +34,6 @@ public class Towers
 
     public void ClearHighlights()
     {
-        Left.Highlight = false;
-        Middle.Highlight = false;
-        Right.Highlight = false;
+        _towers.ForEach(t => t.Highlight = false);
     }
 }
