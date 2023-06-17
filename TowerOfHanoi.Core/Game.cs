@@ -12,10 +12,9 @@ public partial class Game
     private Tower? _targetTower = null;
     private GameState _state = GameState.None;
 
-    public Towers Towers { get; set; } = new();
-    public Messages Messages { get; private set; } = new();
+    public Towers Towers { get; } = new();
+    public Messages Messages { get; } = new();
     public int Difficulty { get; private set; }
-    public int TowerHeight { get; set; }
     public int Moves { get; private set; }
 
     public Game(IIOHandler ioHandler)

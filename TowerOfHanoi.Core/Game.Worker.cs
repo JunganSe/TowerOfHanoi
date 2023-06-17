@@ -21,7 +21,6 @@ public partial class Game
                 && (parsed is >= 1 and <= 5))
             {
                 Difficulty = parsed;
-                TowerHeight = parsed + 2;
                 break;
             }
         }
@@ -30,12 +29,16 @@ public partial class Game
     private void Initialize()
     {
         _ioHandler.ClearScreen();
-        Towers.Initialize(TowerHeight);
+        int towerHeight = MapDifficultyToTowerHeight(Difficulty);
+        Towers.Initialize(towerHeight);
         Messages.Clear();
         Moves = 0;
         _keepLooping = true;
         _state = GameState.Take;
     }
+
+    private int MapDifficultyToTowerHeight(int difficulty)
+        => difficulty + 2;
 
     private void CheckFinish()
     {
