@@ -1,25 +1,20 @@
-﻿namespace TowerOfHanoi.ConsoleApp;
+﻿using TowerOfHanoi.Core.GameComponents;
+
+namespace TowerOfHanoi.ConsoleApp;
 
 public class DrawHandler
 {
-    public void DrawScreen()
-    {
-        DrawBorder();
-        DrawPlayField();
-        DrawMessageBox();
-    }
-
-    private void DrawBorder()
+    public void DrawBorders()
     {
 
     }
 
-    private void DrawPlayField()
+    public void DrawTowers(Towers towers)
     {
 
     }
 
-    private void DrawMessageBox()
+    public void DrawMessages(Messages messages)
     {
 
     }

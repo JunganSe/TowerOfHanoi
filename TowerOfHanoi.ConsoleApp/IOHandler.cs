@@ -1,4 +1,5 @@
 ﻿using TowerOfHanoi.Core.Enums;
+using TowerOfHanoi.Core.GameComponents;
 using TowerOfHanoi.Core.Interfaces;
 
 namespace TowerOfHanoi.ConsoleApp;
@@ -45,9 +46,20 @@ public class IOHandler : IIOHandler
         Console.Clear();
     }
 
-    public void DrawScreen()
+    public void Initialize()
     {
-        _drawHandler.DrawScreen();
+        ClearScreen();
+        _drawHandler.DrawBorders();
+    }
+
+    public void DrawTowers(Towers towers)
+    {
+
+    }
+
+    public void DrawMessages(Messages messages)
+    {
+
     }
 
     public void PrintMessage(string message)
