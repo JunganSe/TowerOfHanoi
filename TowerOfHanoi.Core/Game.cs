@@ -72,7 +72,7 @@ public partial class Game
             }
 
             Messages.Status = $"Taking from {_targetTower.Name} tower.";
-            Towers.Highlight(_targetTower);
+            _targetTower.Highlight = true;
             _state = GameState.Place;
         }
 

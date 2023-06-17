@@ -27,11 +27,6 @@ public class Towers
             Left.Push(new TowerPiece(size));
     }
 
-    public void Highlight(Tower tower)
-    {
-        tower.Highlight = true;
-    }
-
     public void ClearHighlights()
     {
         _towers.ForEach(t => t.Highlight = false);
