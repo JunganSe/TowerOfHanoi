@@ -1,4 +1,5 @@
-﻿using TowerOfHanoi.Core.GameComponents;
+﻿using TowerOfHanoi.Core.Extensions;
+using TowerOfHanoi.Core.GameComponents;
 
 namespace TowerOfHanoi.ConsoleApp;
 
@@ -25,6 +26,16 @@ public class DrawHandler
 
     public void DrawMessages(Messages messages)
     {
-        // Passa in i nedre rutan.
+        int x = MessageBox.X + 1;
+        int y = PlayField.Y + MessageBox.Y + 1;
+        int maxWidth = MessageBox.Width - 2;
+
+        string status = messages.Status.Truncate(maxWidth).PadRight(maxWidth);
+        Console.SetCursorPosition(x, y);
+        Console.Write(status);
+
+        string instruction = messages.Instruction.Truncate(maxWidth).PadRight(maxWidth);
+        Console.SetCursorPosition(x, y + 1);
+        Console.Write(instruction);
     }
 }
