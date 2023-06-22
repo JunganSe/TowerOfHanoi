@@ -22,7 +22,36 @@ public class DrawHandler
 
     public void DrawTowers(Towers towers)
     {
-        // Mitt i övre rutan.
+        var floors = new string[]
+        {
+            "      ==      ",
+            "     ====     ",
+            "    ======    ",
+            "   ========   ",
+            "  ==========  ",
+            " ============ ",
+            "==============",
+        };
+        int x = PlayField.X + 2;
+        int y = PlayField.Y + 9;
+
+        Console.SetCursorPosition(x, y);
+        Console.Write("~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~");
+        Console.SetCursorPosition(x, y + 1);
+        Console.Write("       LEFT               MIDDLE               RIGHT      ");
+        DrawTower(towers.Left, x, y);
+        DrawTower(towers.Middle, x + 20, y);
+        DrawTower(towers.Right, x + 40, y);
+
+        void DrawTower(Tower tower, int x, int y)
+        {
+            for (int i = 0; i < tower.Count; i++)
+            {
+                int floorIndex = tower.Reverse().ElementAt(i).Size - 1;
+                Console.SetCursorPosition(x + 2, y - 1 - i);
+                Console.Write(floors[floorIndex]);
+            }
+        }
     }
 
     public void DrawMessages(Messages messages)
