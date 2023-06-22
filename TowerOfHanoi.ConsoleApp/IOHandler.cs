@@ -54,12 +54,12 @@ public class IOHandler : IIOHandler
 
     public void DrawTowers(Towers towers)
     {
-
+        _drawHandler.DrawTowers(towers);
     }
 
     public void DrawMessages(Messages messages)
     {
-
+        _drawHandler.DrawMessages(messages);
     }
 
     public void PrintMessage(string message)
