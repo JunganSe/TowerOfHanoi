@@ -26,8 +26,8 @@ internal class OutputHandler
 
     public void DrawBorders()
     {
-        DrawBox(_playField.X, _playField.Y, _playField.Width, _playField.Height);
-        DrawBox(_messageBox.X, _messageBox.Y, _messageBox.Width, _messageBox.Height);
+        DrawBox(_playField);
+        DrawBox(_messageBox);
     }
 
     public void DrawTowers(Towers towers)
@@ -67,23 +67,26 @@ internal class OutputHandler
 
 
 
-    private void DrawBox(int x, int y, int width, int height)
+    private void DrawBox(Rectangle rectangle)
     {
+        int x = rectangle.X;
+        int y = rectangle.Y;
+
         string parts = "─│┌┐└┘";
-        string horizontalLine = new String(parts[0], width - 2);
+        string horizontalLine = new string(parts[0], rectangle.Width - 2);
 
         Console.SetCursorPosition(x, y);
         Console.Write(parts[2] + horizontalLine + parts[3]);
 
-        for (int i = 1; i < height - 1; i++)
+        for (int i = 1; i < rectangle.Height - 1; i++)
         {
             Console.SetCursorPosition(x, y + i);
             Console.Write(parts[1]);
-            Console.SetCursorPosition(x + width - 1, y + i);
+            Console.SetCursorPosition(rectangle.Right - 1, y + i);
             Console.Write(parts[1]);
         }
 
-        Console.SetCursorPosition(x, y + height - 1);
+        Console.SetCursorPosition(x, rectangle.Bottom - 1);
         Console.Write(parts[4] + horizontalLine + parts[5]);
     }
 
