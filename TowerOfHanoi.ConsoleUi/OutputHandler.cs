@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using TowerOfHanoi.Core.Components;
+using TowerOfHanoi.Core.Extensions;
 
 namespace TowerOfHanoi.ConsoleUi;
 
@@ -32,7 +33,17 @@ internal class OutputHandler
 
     public void DrawMessages(Messages messages)
     {
-        throw new NotImplementedException();
+        int x = _messageBox.X + 1;
+        int y = _messageBox.Y + 1;
+        int maxWidth = _messageBox.Width - 2;
+
+        string status = messages.Status.Truncate(maxWidth).PadRight(maxWidth);
+        Console.SetCursorPosition(x, y);
+        Console.Write(status);
+
+        string instruction = messages.Instruction.Truncate(maxWidth).PadRight(maxWidth);
+        Console.SetCursorPosition(x, y + 1);
+        Console.Write(instruction);
     }
 
 
