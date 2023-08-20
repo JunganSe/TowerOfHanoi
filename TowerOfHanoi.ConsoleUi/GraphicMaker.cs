@@ -4,11 +4,13 @@ public class GraphicMaker
 {
     private readonly string[] _towerPieces;
     private readonly int _maxTowerHeight;
+    private readonly string _borderParts;
 
     public GraphicMaker(int maxTowerHeight)
     {
         _towerPieces = CreatePieces();
         _maxTowerHeight = maxTowerHeight;
+        _borderParts = "─│┌┐└┘";
     }
 
     private string[] CreatePieces()
@@ -45,4 +47,7 @@ public class GraphicMaker
         // TODO: Padda i mitten
         return name.PadRight(18);
     }
+
+    internal string GetBorderParts()
+        => _borderParts;
 }
