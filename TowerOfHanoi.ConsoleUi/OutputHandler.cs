@@ -8,23 +8,16 @@ internal class OutputHandler
 {
     private readonly Rectangle _playField;
     private readonly Rectangle _messageBox;
-    private readonly string[] _towerPieces;
+    private readonly GraphicMaker _graphicMaker;
 
     public OutputHandler()
     {
         _playField = new Rectangle(2, 1, 62, 12);
         _messageBox = new Rectangle(2, 13, 62, 4);
-        _towerPieces = new string[]
-            {
-                "      ==      ",
-                "     ====     ",
-                "    ======    ",
-                "   ========   ",
-                "  ==========  ",
-                " ============ ",
-                "==============",
-            };
+        _graphicMaker = new GraphicMaker(maxTowerHeight: 7);
     }
+
+
 
     public void ClearScreen()
     {
@@ -42,10 +35,16 @@ internal class OutputHandler
         int x = _playField.X + 2;
         int y = _playField.Y + 9;
 
+        string foundation = _graphicMaker.GetTowerFoundation();
         Console.SetCursorPosition(x, y);
-        Console.Write("~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~");
+        Console.Write($"{foundation}  {foundation}  {foundation}");
+        
+        string name1 = _graphicMaker.GetPaddedTowerName("1");
+        string name2 = _graphicMaker.GetPaddedTowerName("2");
+        string name3 = _graphicMaker.GetPaddedTowerName("3");
         Console.SetCursorPosition(x, y + 1);
-        Console.Write("        1                   2                   3         ");
+        Console.Write($"{name1}  {name2}  {name3}");
+
         DrawTower(towers.Left, x, y);
         DrawTower(towers.Middle, x + 20, y);
         DrawTower(towers.Right, x + 40, y);
@@ -93,8 +92,9 @@ internal class OutputHandler
         for (int i = 0; i < tower.Count; i++)
         {
             int size = tower.Reverse().ElementAt(i).Size;
+            string piece = _graphicMaker.GetTowerPiece(size);
             Console.SetCursorPosition(x + 2, y - 1 - i);
-            Console.Write(_towerPieces[size - 1]);
+            Console.Write(piece);
         }
     }
 }
