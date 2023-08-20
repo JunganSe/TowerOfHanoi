@@ -8,11 +8,10 @@ public static class CommonExtensions
 
     public static string PadBoth(this string value, int totalWidth, char paddingChar = ' ')
     {
-        int totalPaddingSize = totalWidth - value.Length;
-        int leftPaddingSize = totalPaddingSize / 2;
-        int rightPaddingSize = totalPaddingSize - leftPaddingSize;
-        string leftPadding = new string(paddingChar, leftPaddingSize);
-        string rightPadding = new string(paddingChar, rightPaddingSize);
-        return leftPadding + value + rightPadding;
+        if (value.Length >= totalWidth)
+            return value;
+        string padded = value.PadRight(totalWidth, paddingChar);
+        int shift = (totalWidth - value.Length) / 2;
+        return padded[^shift..] + padded[..^shift];
     }
 }
