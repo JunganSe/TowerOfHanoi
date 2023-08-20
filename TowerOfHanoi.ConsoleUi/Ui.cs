@@ -25,8 +25,6 @@ public class Ui : IUi
         throw new NotImplementedException();
     }
 
-    public InputCommand GetInput()
-    {
-        throw new NotImplementedException();
-    }
+    public InputCommand GetInput() 
+        => _inputHandler.GetInput();
 }
