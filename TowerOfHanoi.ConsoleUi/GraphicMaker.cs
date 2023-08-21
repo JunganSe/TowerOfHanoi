@@ -2,7 +2,7 @@
 
 namespace TowerOfHanoi.ConsoleUi;
 
-public class GraphicMaker
+internal class GraphicMaker
 {
     private readonly int _maxTowerHeight;
     private readonly int _foundationWidth;

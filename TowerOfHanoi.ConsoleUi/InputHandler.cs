@@ -10,7 +10,7 @@ internal class InputHandler
         return MapConsoleKeyToInputCommand(key);
     }
 
-    public InputCommand MapConsoleKeyToInputCommand(ConsoleKey key)
+    private InputCommand MapConsoleKeyToInputCommand(ConsoleKey key)
     {
         return key switch
         {
