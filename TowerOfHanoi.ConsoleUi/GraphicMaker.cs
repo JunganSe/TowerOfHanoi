@@ -23,13 +23,9 @@ public class GraphicMaker
 
     private string[] CreatePieces()
     {
-        var output = new string[_maxTowerHeight];
-        for (int i = 0; i < _maxTowerHeight; i++)
-        {
-            string unpaddedPiece = new string(_towerPiecePart, (i + 1) * 2);
-            output[i] = unpaddedPiece.PadBoth(_maxTowerHeight * 2);
-        }
-        return output;
+        return Enumerable.Range(1, _maxTowerHeight)
+            .Select(i => new string(_towerPiecePart, i * 2).PadBoth(_maxTowerHeight * 2))
+            .ToArray();
     }
 
 
