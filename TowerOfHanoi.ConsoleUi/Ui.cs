@@ -15,14 +15,17 @@ public class Ui : IUi
         _outputHandler = new OutputHandler();
     }
 
-    public void Initialize()
+    public void Initialize() // NOTE: Överflödig?
     {
-        throw new NotImplementedException();
+        _outputHandler.ClearScreen();
     }
 
     public void Draw(World world)
     {
-        throw new NotImplementedException();
+        _outputHandler.ClearScreen();
+        _outputHandler.DrawBorders();
+        _outputHandler.DrawTowers(world.Towers);
+        _outputHandler.DrawMessages(world.Messages);
     }
 
     public InputCommand GetInput() 
