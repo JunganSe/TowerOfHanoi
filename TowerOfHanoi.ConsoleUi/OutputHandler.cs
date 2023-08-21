@@ -71,6 +71,7 @@ internal class OutputHandler
     {
         int x = rectangle.X;
         int y = rectangle.Y;
+        int right = rectangle.Right - 1;
 
         string parts = _graphicMaker.GetBorderParts();
         string horizontalLine = new string(parts[0], rectangle.Width - 2);
@@ -82,7 +83,7 @@ internal class OutputHandler
         {
             Console.SetCursorPosition(x, y + i);
             Console.Write(parts[1]);
-            Console.SetCursorPosition(rectangle.Right - 1, y + i);
+            Console.SetCursorPosition(right, y + i);
             Console.Write(parts[1]);
         }
 
