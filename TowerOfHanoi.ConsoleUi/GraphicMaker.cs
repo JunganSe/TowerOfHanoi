@@ -18,32 +18,24 @@ public class GraphicMaker
         _borderParts = "─│┌┐└┘";
         _FoundationPart = '~';
         _towerPiecePart = '=';
-        _towerPieces = CreatePieces();
+        _towerPieces = CreateTowerPieces();
     }
 
-    private string[] CreatePieces()
-    {
-        return Enumerable.Range(1, _maxTowerHeight)
+    private string[] CreateTowerPieces() 
+        => Enumerable.Range(1, _maxTowerHeight)
             .Select(i => new string(_towerPiecePart, i * 2).PadBoth(_maxTowerHeight * 2))
             .ToArray();
-    }
 
 
 
-    internal string GetTowerPiece(int size)
-    {
-        return _towerPieces[size - 1];
-    }
+    internal string GetTowerPiece(int size) 
+        => _towerPieces[size - 1];
 
-    internal string GetTowerFoundation()
-    {
-        return new string(_FoundationPart, _foundationWidth);
-    }
+    internal string GetTowerFoundation() 
+        => new string(_FoundationPart, _foundationWidth);
 
-    internal string GetPaddedTowerName(string name)
-    {
-        return name.PadBoth(_foundationWidth);
-    }
+    internal string GetPaddedTowerName(string name) 
+        => name.PadBoth(_foundationWidth);
 
     internal string GetBorderParts()
         => _borderParts;
