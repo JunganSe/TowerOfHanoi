@@ -13,4 +13,24 @@ public class Worker
         _ui = ui;
         _world = world;
     }
+
+
+
+    public int SelectDifficulty()
+    {
+        var difficulties = new Dictionary<int, string>()
+        {
+            { 1, "Child's play" },
+            { 2, "Easy" },
+            { 3, "Medium" },
+            { 4, "Hard" },
+            { 5, "Kinda tedious" }
+        };
+        while (true)
+        {
+            int response = _ui.GetDifficulty(difficulties);
+            if (response is >= 1 and <= 5)
+                return response;
+        }
+    }
 }

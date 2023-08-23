@@ -10,6 +10,8 @@ public class Controller
     private readonly Worker _worker;
     private GameState _state;
 
+    public int Difficulty { get; private set; }
+
     public Controller(IUi ui)
     {
         _world = new World();
@@ -21,6 +23,7 @@ public class Controller
 
     public void Run()
     {
+        Difficulty = _worker.SelectDifficulty();
 
     }
 }
