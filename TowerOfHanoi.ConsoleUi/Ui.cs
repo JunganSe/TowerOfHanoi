@@ -30,4 +30,10 @@ public class Ui : IUi
 
     public InputCommand GetInput() 
         => _inputHandler.GetInput();
+
+    public int GetDifficulty(Dictionary<int, string> difficulties)
+    {
+        // TODO: Välja svårighetsgrad.
+        return 3;
+    }
 }
