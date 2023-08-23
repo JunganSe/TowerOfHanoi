@@ -24,8 +24,16 @@ public class Controller
 
     public void Run()
     {
-        Difficulty = _worker.SelectDifficulty();
-        Initialize();
+        bool restart = true;
+        while (restart)
+        {
+            Difficulty = _worker.SelectDifficulty();
+            Initialize();
+            MainLoop();
+            // Kolla om spelaren vann eller avbröt. Om vann, gratulera och visa antal moves.
+            restart = AskRestart();
+        }
+        Quit();
     }
 
     private void Initialize()
@@ -34,5 +42,25 @@ public class Controller
         int towerHeight = _worker.MapDifficultyToTowerHeight(Difficulty);
         _world.Towers.Initialize(towerHeight);
         _state = GameState.Take;
+    }
+
+    private void MainLoop()
+    {
+        bool keepLooping = true;
+        while (keepLooping)
+        {
+
+        }
+    }
+
+    private bool AskRestart()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Quit()
+    {
+        // Hanteras av ui?
+        throw new NotImplementedException();
     }
 }
