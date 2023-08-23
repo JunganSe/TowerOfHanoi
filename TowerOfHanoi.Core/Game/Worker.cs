@@ -33,4 +33,9 @@ internal class Worker
                 return response;
         }
     }
+
+    public int MapDifficultyToTowerHeight(int difficulty)
+    {
+        return difficulty + 2;
+    }
 }

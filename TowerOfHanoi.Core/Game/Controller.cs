@@ -11,6 +11,7 @@ public class Controller
     private GameState _state;
 
     public int Difficulty { get; private set; }
+    public int Moves { get; private set; }
 
     public Controller(IUi ui)
     {
@@ -24,6 +25,14 @@ public class Controller
     public void Run()
     {
         Difficulty = _worker.SelectDifficulty();
+        Initialize();
+    }
 
+    private void Initialize()
+    {
+        _world.Messages.Clear();
+        int towerHeight = _worker.MapDifficultyToTowerHeight(Difficulty);
+        _world.Towers.Initialize(towerHeight);
+        _state = GameState.Take;
     }
 }
