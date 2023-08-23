@@ -3,7 +3,7 @@ using TowerOfHanoi.Core.Interfaces;
 
 namespace TowerOfHanoi.Core.Game;
 
-public class Worker
+internal class Worker
 {
     private readonly IUi _ui;
     private readonly World _world;
