@@ -9,12 +9,18 @@ internal class OutputHandler
     private readonly Rectangle _playField;
     private readonly Rectangle _messageBox;
     private readonly GraphicMaker _graphicMaker;
+    private readonly ConsoleColor _mainColor;
+    private readonly ConsoleColor _highlightColor;
+    private readonly ConsoleColor _backgroundColor;
 
     public OutputHandler()
     {
         _playField = new Rectangle(2, 1, 62, 12);
         _messageBox = new Rectangle(2, 13, 62, 4);
         _graphicMaker = new GraphicMaker(maxTowerHeight: 7);
+        _mainColor = ConsoleColor.White;
+        _highlightColor = ConsoleColor.Green;
+        _backgroundColor = ConsoleColor.Black;
     }
 
 
@@ -26,19 +32,21 @@ internal class OutputHandler
 
     public void DrawBorders()
     {
+        ResetColors();
         DrawBox(_playField);
         DrawBox(_messageBox);
     }
 
     public void DrawTowers(Towers towers)
     {
+        ResetColors();
         int x = _playField.X + 2;
         int y = _playField.Y + 9;
 
         string foundation = _graphicMaker.GetTowerFoundation();
         Console.SetCursorPosition(x, y);
         Console.Write($"{foundation}  {foundation}  {foundation}");
-        
+
         string name1 = _graphicMaker.GetPaddedTowerName("1");
         string name2 = _graphicMaker.GetPaddedTowerName("2");
         string name3 = _graphicMaker.GetPaddedTowerName("3");
@@ -52,6 +60,7 @@ internal class OutputHandler
 
     public void DrawMessages(Messages messages)
     {
+        ResetColors();
         int x = _messageBox.X + 1;
         int y = _messageBox.Y + 1;
         int maxWidth = _messageBox.Width - 2;
@@ -66,6 +75,12 @@ internal class OutputHandler
     }
 
 
+
+    private void ResetColors()
+    {
+        Console.ForegroundColor = _mainColor;
+        Console.BackgroundColor = _backgroundColor;
+    }
 
     private void DrawBox(Rectangle rectangle)
     {
@@ -95,6 +110,8 @@ internal class OutputHandler
     {
         for (int i = 0; i < tower.Count; i++)
         {
+            if (i == tower.Count - 1 && tower.Highlight)
+                Console.ForegroundColor = _highlightColor;
             int size = tower.Reverse().ElementAt(i).Size;
             string piece = _graphicMaker.GetTowerPiece(size);
             Console.SetCursorPosition(x + 2, y - 1 - i);
