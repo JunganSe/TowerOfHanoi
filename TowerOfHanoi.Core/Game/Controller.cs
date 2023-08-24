@@ -26,7 +26,7 @@ public class Controller
 
     public void Run()
     {
-        bool restart = false;
+        bool restart = true;
         while (restart)
         {
             Difficulty = _worker.SelectDifficulty();
@@ -62,6 +62,10 @@ public class Controller
 
                 if (!_worker.CheckTargetTower(targetTower))
                     continue;
+                targetTower!.Highlight = true;
+                _world.Messages.Status = $"Taking from {targetTower!.Name} tower.";
+                _ui.Draw(_world);
+                _state = GameState.Place;
             }
         }
     }
