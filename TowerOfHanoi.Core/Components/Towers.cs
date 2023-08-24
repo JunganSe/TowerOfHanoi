@@ -10,15 +10,23 @@ public class Towers
 
     public Towers()
     {
-        _towers = new List<Tower>() { new(), new(), new() };
+        _towers = new List<Tower>()
+        {
+            new() { Name = "left"},
+            new() { Name = "middle"},
+            new() { Name = "right"},
+        };
     }
 
     public void Initialize(int height)
     {
-        Left.Clear();
-        Middle.Clear();
-        Right.Clear();
+        _towers.ForEach(t => t.Clear());
         for (int size = height; size > 0; size--)
             Left.Push(new TowerPiece(size));
+    }
+
+    public void ClearHighlights()
+    {
+        _towers.ForEach(t => t.Highlight = false);
     }
 }
