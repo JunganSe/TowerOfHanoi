@@ -8,6 +8,7 @@ public class Controller
 {
     private readonly World _world;
     private readonly Worker _worker;
+    private readonly IUi _ui;
     private GameState _state;
 
     public int Difficulty { get; private set; }
@@ -17,6 +18,7 @@ public class Controller
     {
         _world = new World();
         _worker = new Worker(ui, _world);
+        _ui = ui;
         _state = GameState.None;
     }
 
@@ -24,7 +26,7 @@ public class Controller
 
     public void Run()
     {
-        bool restart = true;
+        bool restart = false;
         while (restart)
         {
             Difficulty = _worker.SelectDifficulty();
@@ -46,10 +48,21 @@ public class Controller
 
     private void MainLoop()
     {
-        bool keepLooping = true;
-        while (keepLooping)
+        while (true)
         {
+            if (_state == GameState.Take)
+            {
+                _world.Messages.Instruction = "Select tower to take from.";
+                _ui.Draw(_world);
 
+                var command = _ui.GetInput();
+                if (command == InputCommand.Quit)
+                    return;
+                var targetTower = _worker.MapCommandToTower(command);
+
+                if (!_worker.CheckTargetTower(targetTower))
+                    continue;
+            }
         }
     }
 

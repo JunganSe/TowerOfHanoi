@@ -1,4 +1,5 @@
 ﻿using TowerOfHanoi.Core.Components;
+using TowerOfHanoi.Core.Enums;
 using TowerOfHanoi.Core.Interfaces;
 
 namespace TowerOfHanoi.Core.Game;
@@ -37,5 +38,31 @@ internal class Worker
     public int MapDifficultyToTowerHeight(int difficulty)
     {
         return difficulty + 2;
+    }
+
+    public Tower? MapCommandToTower(InputCommand command)
+    {
+        return command switch
+        {
+            InputCommand.TowerLeft => _world.Towers.Left,
+            InputCommand.TowerMiddle => _world.Towers.Middle,
+            InputCommand.TowerRight => _world.Towers.Right,
+            _ => null
+        };
+    }
+
+    public bool CheckTargetTower(Tower? tower)
+    {
+        if (tower == null)
+        {
+            _world.Messages.Status = "Unknown command, try again.";
+            return false;
+        }
+        if (tower.IsEmpty)
+        {
+            _world.Messages.Status = "Can not take from empty tower.";
+            return false;
+        }
+        return true;
     }
 }
