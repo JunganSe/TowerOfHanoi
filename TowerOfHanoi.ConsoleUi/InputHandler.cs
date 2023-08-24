@@ -4,7 +4,7 @@ namespace TowerOfHanoi.ConsoleUi;
 
 internal class InputHandler
 {
-    public InputCommand GetInput()
+    public InputCommand GetInputCommand()
     {
         var key = Console.ReadKey(true).Key;
         return MapConsoleKeyToInputCommand(key);

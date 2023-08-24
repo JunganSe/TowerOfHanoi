@@ -28,8 +28,8 @@ public class Ui : IUi
         _outputHandler.DrawMessages(world.Messages);
     }
 
-    public InputCommand GetInput() 
-        => _inputHandler.GetInput();
+    public InputCommand GetInputCommand() 
+        => _inputHandler.GetInputCommand();
 
     public int GetDifficulty(Dictionary<int, string> difficulties)
     {

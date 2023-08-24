@@ -55,7 +55,7 @@ public class Controller
                 _world.Messages.Instruction = "Select tower to take from.";
                 _ui.Draw(_world);
 
-                var command = _ui.GetInput();
+                var command = _ui.GetInputCommand();
                 if (command == InputCommand.Quit)
                     return;
                 var targetTower = _worker.MapCommandToTower(command);

@@ -7,6 +7,6 @@ public interface IUi
 {
     public void Initialize();
     public void Draw(World world);
-    public InputCommand GetInput();
+    public InputCommand GetInputCommand();
     public int GetDifficulty(Dictionary<int, string> difficulties);
 }
