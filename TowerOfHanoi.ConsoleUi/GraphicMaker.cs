@@ -28,15 +28,15 @@ internal class GraphicMaker
 
 
 
-    internal string GetTowerPiece(int size) 
+    public string GetTowerPiece(int size) 
         => _towerPieces[size - 1];
 
-    internal string GetTowerFoundation() 
+    public string GetTowerFoundation() 
         => new string(_FoundationPart, _foundationWidth);
 
-    internal string GetPaddedTowerName(string name) 
+    public string GetPaddedTowerName(string name) 
         => name.PadBoth(_foundationWidth);
 
-    internal string GetBorderParts()
+    public string GetBorderParts()
         => _borderParts;
 }
