@@ -51,7 +51,7 @@ internal class Worker
         };
     }
 
-    public bool CheckTargetTower(Tower? tower)
+    public bool CheckCanTakeFromTower(Tower? tower)
     {
         if (tower == null)
         {

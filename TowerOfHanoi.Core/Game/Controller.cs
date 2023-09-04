@@ -60,7 +60,7 @@ public class Controller
                     return;
                 var targetTower = _worker.MapCommandToTower(command);
 
-                if (!_worker.CheckTargetTower(targetTower))
+                if (!_worker.CheckCanTakeFromTower(targetTower))
                     continue;
                 targetTower!.Highlight = true;
                 _world.Messages.Status = $"Taking from {targetTower!.Name} tower.";
