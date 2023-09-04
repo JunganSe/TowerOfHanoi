@@ -48,6 +48,7 @@ public class Controller
 
     private void MainLoop()
     {
+        Tower? fromTower = null;
         while (true)
         {
             if (_state == GameState.Take)
@@ -62,10 +63,27 @@ public class Controller
 
                 if (!_worker.CheckCanTakeFromTower(targetTower))
                     continue;
+
                 targetTower!.Highlight = true;
+                fromTower = targetTower;
                 _world.Messages.Status = $"Taking from {targetTower!.Name} tower.";
                 _ui.Draw(_world);
+
                 _state = GameState.Place;
+            }
+
+            if (_state == GameState.Place)
+            {
+                _world.Messages.Instruction = "Select tower to place on.";
+                _ui.Draw(_world);
+
+                var command = _ui.GetInputCommand();
+                if (command == InputCommand.Quit)
+                    return;
+                var targetTower = _worker.MapCommandToTower(command);
+
+                if (!_worker.CheckCanPlaceOnTower(fromTower!, targetTower))
+                    continue;
             }
         }
     }
