@@ -73,6 +73,11 @@ internal class Worker
             _world.Messages.Status = "Unknown command, try again.";
             return false;
         }
+        if (currentTower == targetTower)
+        {
+            _world.Messages.Status = "Can not place on same tower, try again.";
+            return false;
+        }
         if (currentTower.TopFloorSize >= targetTower.TopFloorSize)
         {
             _world.Messages.Status = "Must place on larger tower piece, try again.";
