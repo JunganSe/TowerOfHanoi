@@ -65,4 +65,19 @@ internal class Worker
         }
         return true;
     }
+
+    public bool CheckCanPlaceOnTower(Tower currentTower, Tower? targetTower)
+    {
+        if (targetTower == null)
+        {
+            _world.Messages.Status = "Unknown command, try again.";
+            return false;
+        }
+        if (currentTower.TopFloorSize >= targetTower.TopFloorSize)
+        {
+            _world.Messages.Status = "Must place on larger tower piece, try again.";
+            return false;
+        }
+        return true;
+    }
 }
