@@ -53,6 +53,7 @@ public class Controller
         {
             if (_state == GameState.Take)
             {
+                _world.Towers.ClearHighlights();
                 _world.Messages.Instruction = "Select tower to take from.";
                 _ui.Draw(_world);
 
@@ -83,7 +84,18 @@ public class Controller
                 var targetTower = _worker.MapCommandToTower(command);
 
                 if (!_worker.CheckCanPlaceOnTower(fromTower!, targetTower))
+                {
+                    _state = GameState.Take;
                     continue;
+                }
+
+                _worker.MoveTowerPiece(fromTower!, targetTower!);
+                _world.Messages.Status = $"Moved from {fromTower!.Name} tower to {targetTower!.Name} tower.";
+                _ui.Draw(_world);
+
+                // TODO: Check for win
+
+                _state = GameState.Take;
             }
         }
     }

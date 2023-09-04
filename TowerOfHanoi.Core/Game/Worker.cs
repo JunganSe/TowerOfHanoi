@@ -80,4 +80,10 @@ internal class Worker
         }
         return true;
     }
+
+    public void MoveTowerPiece(Tower fromTower, Tower targetTower)
+    {
+        var piece = fromTower.Pop();
+        targetTower.Push(piece);
+    }
 }
