@@ -110,8 +110,11 @@ internal class OutputHandler
     {
         for (int i = 0; i < tower.Count; i++)
         {
-            if (i == tower.Count - 1 && tower.Highlight)
+            if (tower.Highlight && i == tower.Count - 1)
                 Console.ForegroundColor = _highlightColor;
+            else
+                Console.ForegroundColor = _mainColor;
+
             int size = tower.Reverse().ElementAt(i).Size;
             string piece = _graphicMaker.GetTowerPiece(size);
             Console.SetCursorPosition(x + 2, y - 1 - i);
