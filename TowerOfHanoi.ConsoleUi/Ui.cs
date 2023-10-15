@@ -13,6 +13,7 @@ public class Ui : IUi
     {
         _inputHandler = new InputHandler();
         _outputHandler = new OutputHandler();
+        Console.CursorVisible = false;
     }
 
     public void Initialize() // NOTE: Överflödig?
