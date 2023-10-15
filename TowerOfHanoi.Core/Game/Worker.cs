@@ -51,7 +51,7 @@ internal class Worker
         };
     }
 
-    public bool CheckCanTakeFromTower(Tower? tower)
+    public bool CanTakeFromTower(Tower? tower)
     {
         if (tower == null)
         {
@@ -66,19 +66,19 @@ internal class Worker
         return true;
     }
 
-    public bool CheckCanPlaceOnTower(Tower currentTower, Tower? targetTower)
+    public bool CanMoveToTower(Tower sourceTower, Tower? targetTower)
     {
         if (targetTower == null)
         {
             _world.Messages.Status = "Unknown command, try again.";
             return false;
         }
-        if (currentTower == targetTower)
+        if (sourceTower == targetTower)
         {
             _world.Messages.Status = "Can not place on same tower, try again.";
             return false;
         }
-        if (currentTower.TopFloorSize >= targetTower.TopFloorSize)
+        if (sourceTower.TopFloorSize >= targetTower.TopFloorSize)
         {
             _world.Messages.Status = "Must place on larger tower piece, try again.";
             return false;
@@ -86,9 +86,9 @@ internal class Worker
         return true;
     }
 
-    public void MoveTowerPiece(Tower fromTower, Tower targetTower)
+    public void MoveTowerPiece(Tower sourceTower, Tower targetTower)
     {
-        var piece = fromTower.Pop();
+        var piece = sourceTower.Pop();
         targetTower.Push(piece);
     }
 }

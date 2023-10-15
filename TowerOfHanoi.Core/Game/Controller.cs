@@ -48,7 +48,7 @@ public class Controller
 
     private void MainLoop()
     {
-        Tower? fromTower = null;
+        Tower? sourceTower = null;
         while (true)
         {
             if (_state == GameState.Take)
@@ -62,12 +62,12 @@ public class Controller
                     return;
                 var targetTower = _worker.MapCommandToTower(command);
 
-                if (!_worker.CheckCanTakeFromTower(targetTower))
+                if (!_worker.CanTakeFromTower(targetTower))
                     continue;
 
                 targetTower!.Highlight = true;
-                fromTower = targetTower;
-                _world.Messages.Status = $"Taking from {targetTower!.Name} tower.";
+                sourceTower = targetTower;
+                _world.Messages.Status = $"Taking from {sourceTower!.Name} tower.";
                 _ui.Draw(_world);
 
                 _state = GameState.Place;
@@ -83,14 +83,14 @@ public class Controller
                     return;
                 var targetTower = _worker.MapCommandToTower(command);
 
-                if (!_worker.CheckCanPlaceOnTower(fromTower!, targetTower))
+                if (!_worker.CanMoveToTower(sourceTower!, targetTower))
                 {
                     _state = GameState.Take;
                     continue;
                 }
 
-                _worker.MoveTowerPiece(fromTower!, targetTower!);
-                _world.Messages.Status = $"Moved from {fromTower!.Name} tower to {targetTower!.Name} tower.";
+                _worker.MoveTowerPiece(sourceTower!, targetTower!);
+                _world.Messages.Status = $"Moved from {sourceTower!.Name} tower to {targetTower!.Name} tower.";
                 _ui.Draw(_world);
 
                 // TODO: Check for win
