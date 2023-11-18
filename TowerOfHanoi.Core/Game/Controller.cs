@@ -64,6 +64,7 @@ public class Controller
                     return;
                 var targetTower = _worker.MapCommandToTower(command);
 
+                _worker.SetTakeFromTowerStatusMessage(targetTower);
                 if (!_worker.CanTakeFromTower(targetTower))
                     continue;
 
@@ -85,6 +86,7 @@ public class Controller
                     return;
                 var targetTower = _worker.MapCommandToTower(command);
 
+                _worker.SetMoveToTowerStatusMessage(sourceTower!, targetTower);
                 if (!_worker.CanMoveToTower(sourceTower!, targetTower))
                 {
                     _state = GameState.Take;

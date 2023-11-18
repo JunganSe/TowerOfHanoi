@@ -51,39 +51,35 @@ internal class Worker
         };
     }
 
-    public bool CanTakeFromTower(Tower? tower)
+    public void SetTakeFromTowerStatusMessage(Tower? tower)
     {
         if (tower == null)
-        {
             _world.Messages.Status = "Unknown command, try again.";
-            return false;
-        }
-        if (tower.IsEmpty)
-        {
+        else if (tower.IsEmpty)
             _world.Messages.Status = "Can not take from empty tower.";
-            return false;
-        }
-        return true;
+    }
+
+    public bool CanTakeFromTower(Tower? tower)
+    {
+        return !(tower == null 
+            || tower.IsEmpty);
+    }
+
+    public void SetMoveToTowerStatusMessage(Tower sourceTower, Tower? targetTower)
+    {
+        if (targetTower == null)
+            _world.Messages.Status = "Unknown command, try again.";
+        else if (sourceTower == targetTower)
+            _world.Messages.Status = "Can not place on same tower, try again.";
+        else if (sourceTower.TopFloorSize >= targetTower.TopFloorSize)
+            _world.Messages.Status = "Must place on larger tower piece, try again.";
     }
 
     public bool CanMoveToTower(Tower sourceTower, Tower? targetTower)
     {
-        if (targetTower == null)
-        {
-            _world.Messages.Status = "Unknown command, try again.";
-            return false;
-        }
-        if (sourceTower == targetTower)
-        {
-            _world.Messages.Status = "Can not place on same tower, try again.";
-            return false;
-        }
-        if (sourceTower.TopFloorSize >= targetTower.TopFloorSize)
-        {
-            _world.Messages.Status = "Must place on larger tower piece, try again.";
-            return false;
-        }
-        return true;
+        return !(targetTower == null
+            || sourceTower == targetTower
+            || sourceTower.TopFloorSize >= targetTower.TopFloorSize);
     }
 
     public void MoveTowerPiece(Tower sourceTower, Tower targetTower)
