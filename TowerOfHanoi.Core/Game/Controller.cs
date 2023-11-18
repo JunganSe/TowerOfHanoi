@@ -45,6 +45,7 @@ public class Controller
         _world.Towers.Initialize(towerHeight);
         _state = GameState.Take;
         _movesCount = 0;
+        _ui.Initialize();
     }
 
     private void MainLoop()
