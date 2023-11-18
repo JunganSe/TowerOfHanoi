@@ -11,6 +11,7 @@ public class Controller
     private readonly IUi _ui;
     private GameState _state;
     private int _movesCount;
+    private Tower? _sourceTower;
 
     public Controller(IUi ui)
     {
@@ -48,66 +49,77 @@ public class Controller
 
     private void MainLoop()
     {
-        Tower? sourceTower = null;
         while (true)
         {
             if (_state == GameState.Take)
-            {
-                _world.Towers.ClearHighlights();
-                _world.Messages.Instruction = "Select tower to take from.";
-                _ui.Draw(_world);
-
-                var command = _ui.GetInputCommand();
-                if (command == InputCommand.Quit)
-                {
-                    _world.Messages.Status = "";
-                    return;
-                }
-                var targetTower = _worker.MapCommandToTower(command);
-
-                _worker.SetTakeFromTowerStatusMessage(targetTower);
-                if (!_worker.CanTakeFromTower(targetTower))
-                    continue;
-
-                targetTower!.Highlight = true;
-                sourceTower = targetTower;
-                _world.Messages.Status = $"Taking from {sourceTower!.Name}.";
-                _ui.Draw(_world);
-
-                _state = GameState.Place;
-            }
-
+                Take();
             if (_state == GameState.Place)
-            {
-                _world.Messages.Instruction = "Select tower to place on.";
-                _ui.Draw(_world);
-
-                var command = _ui.GetInputCommand();
-                if (command == InputCommand.Quit)
-                {
-                    _world.Messages.Status = "";
-                    return;
-                }
-                var targetTower = _worker.MapCommandToTower(command);
-
-                _worker.SetMoveToTowerStatusMessage(sourceTower!, targetTower);
-                if (!_worker.CanMoveToTower(sourceTower!, targetTower))
-                {
-                    _state = GameState.Take;
-                    continue;
-                }
-
-                _worker.MoveTowerPiece(sourceTower!, targetTower!);
-                _movesCount++;
-                _world.Messages.Status = $"Moved from {sourceTower!.Name} to {targetTower!.Name}.";
-                _ui.Draw(_world);
-
-                if (_worker.IsGameWon())
-                    return;
-
-                _state = GameState.Take;
-            }
+                Place();
+            if (_state == GameState.Quit)
+                return;
         }
+    }
+
+    private void Take()
+    {
+        _world.Towers.ClearHighlights();
+        _world.Messages.Instruction = "Select tower to take from.";
+        _ui.Draw(_world);
+
+        var command = _ui.GetInputCommand();
+        if (command == InputCommand.Quit)
+        {
+            _world.Messages.Status = "";
+            _state = GameState.Quit;
+            return;
+        }
+        var targetTower = _worker.MapCommandToTower(command);
+
+        _worker.SetTakeFromTowerStatusMessage(targetTower);
+        if (!_worker.CanTakeFromTower(targetTower))
+            return;
+
+        targetTower!.Highlight = true;
+        _sourceTower = targetTower;
+        _world.Messages.Status = $"Taking from {_sourceTower!.Name}.";
+        _ui.Draw(_world);
+
+        _state = GameState.Place;
+    }
+
+    private void Place()
+    {
+        _world.Messages.Instruction = "Select tower to place onto.";
+        _ui.Draw(_world);
+
+        var command = _ui.GetInputCommand();
+        if (command == InputCommand.Quit)
+        {
+            _world.Messages.Status = "";
+            _state = GameState.Quit;
+            return;
+        }
+        var targetTower = _worker.MapCommandToTower(command);
+
+        _worker.SetMoveToTowerStatusMessage(_sourceTower!, targetTower);
+        if (!_worker.CanMoveToTower(_sourceTower!, targetTower))
+        {
+            _state = GameState.Take;
+            return;
+        }
+
+        _worker.MoveTowerPiece(_sourceTower!, targetTower!);
+        _movesCount++;
+        _world.Messages.Status = $"Moved from {_sourceTower!.Name} to {targetTower!.Name}.";
+        _ui.Draw(_world);
+
+        if (_worker.IsGameWon())
+        {
+            _state = GameState.Quit;
+            return;
+        }
+
+        _state = GameState.Take;
     }
 
     private void End()
