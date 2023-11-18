@@ -12,9 +12,9 @@ public class Towers
     {
         _towers = new List<Tower>()
         {
-            new() { Name = "left"},
-            new() { Name = "middle"},
-            new() { Name = "right"},
+            new() { Name = "left tower"},
+            new() { Name = "middle tower"},
+            new() { Name = "right tower"},
         };
     }
 

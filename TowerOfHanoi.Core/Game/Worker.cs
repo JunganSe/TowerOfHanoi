@@ -60,7 +60,7 @@ internal class Worker
         if (tower == null)
             _world.Messages.Status = "Unknown command, try again.";
         else if (tower.IsEmpty)
-            _world.Messages.Status = "Can not take from empty tower.";
+            _world.Messages.Status = "Can not take from an empty tower.";
     }
 
     public bool CanTakeFromTower(Tower? tower)
@@ -74,7 +74,7 @@ internal class Worker
         if (targetTower == null)
             _world.Messages.Status = "Unknown command, try again.";
         else if (sourceTower == targetTower)
-            _world.Messages.Status = "Can not place on same tower, try again.";
+            _world.Messages.Status = "Can not place on the same tower, try again.";
         else if (sourceTower.TopFloorSize >= targetTower.TopFloorSize)
             _world.Messages.Status = "Must place on larger tower piece, try again.";
     }
@@ -94,8 +94,7 @@ internal class Worker
 
     public bool IsGameWon()
     {
-        return _world.Towers.Left.IsEmpty
-            && _world.Towers.Middle.IsEmpty;
+        return _world.Towers.Right.Count == GetTowerHeightFromDifficulty();
     }
 
     public int GetMinimumMovesToWin()
@@ -107,7 +106,7 @@ internal class Worker
     public void Congratulate(int movesUsed)
     {
         bool isPerfectScore = (movesUsed == GetMinimumMovesToWin());
-        _world.Messages.Status = (isPerfectScore) ? "Perfect!" : "Success!";
-        _world.Messages.Status += $" You completed the game in {movesUsed} moves on difficulty {_world.Parameters.Difficulty}.";
+        _world.Messages.Status = (isPerfectScore? "Perfect!" : "Success!")
+            + $" You completed the game in {movesUsed} moves on difficulty {_world.Parameters.Difficulty}.";
     }
 }

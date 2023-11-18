@@ -67,7 +67,7 @@ public class Controller
 
                 targetTower!.Highlight = true;
                 sourceTower = targetTower;
-                _world.Messages.Status = $"Taking from {sourceTower!.Name} tower.";
+                _world.Messages.Status = $"Taking from {sourceTower!.Name}.";
                 _ui.Draw(_world);
 
                 _state = GameState.Place;
@@ -92,13 +92,13 @@ public class Controller
 
                 _worker.MoveTowerPiece(sourceTower!, targetTower!);
                 _movesCount++;
-                _world.Messages.Status = $"Moved from {sourceTower!.Name} tower to {targetTower!.Name} tower.";
+                _world.Messages.Status = $"Moved from {sourceTower!.Name} to {targetTower!.Name}.";
                 _ui.Draw(_world);
 
                 if (_worker.IsGameWon())
                 {
                     _worker.Congratulate(_movesCount);
-                    _world.Messages.Instruction = "Press R to play again, or any key to quit.";
+                    _world.Messages.Instruction = "Press R to play again, or any other key to quit.";
                     _ui.Draw(_world);
                     break;
                 }
