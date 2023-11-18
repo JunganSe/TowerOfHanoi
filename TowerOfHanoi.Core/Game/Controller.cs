@@ -6,18 +6,20 @@ namespace TowerOfHanoi.Core.Game;
 
 public class Controller
 {
+    private readonly IUi _ui;
     private readonly World _world;
     private readonly Worker _worker;
-    private readonly IUi _ui;
+
     private GameState _state;
     private int _movesCount;
     private Tower? _sourceTower;
 
     public Controller(IUi ui)
     {
+        _ui = ui;
         _world = new World();
         _worker = new Worker(ui, _world);
-        _ui = ui;
+
         _state = GameState.None;
         _movesCount = 0;
     }

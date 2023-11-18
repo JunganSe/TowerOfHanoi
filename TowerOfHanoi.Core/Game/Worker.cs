@@ -107,7 +107,7 @@ internal class Worker
     {
         bool isPerfectScore = (movesUsed == GetMinimumMovesToWin());
         _world.Messages.Status = (isPerfectScore? "Perfect!" : "Success!")
-            + $" You completed the game in {movesUsed} moves on difficulty {_world.Parameters.Difficulty}.";
+            + $" Game completed in {movesUsed} moves on difficulty {_world.Parameters.Difficulty}.";
     }
 
     public bool AskRestart()
