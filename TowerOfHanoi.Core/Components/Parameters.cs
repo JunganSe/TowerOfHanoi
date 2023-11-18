@@ -2,6 +2,12 @@
 
 public class Parameters
 {
-    public Dictionary<int, string> Difficulties { get; init; } = new() { { -1, "-Error-" } };
-    public int Difficulty { get; init; } = -1;
+    public Dictionary<int, string> Difficulties { get; init; }
+    public int Difficulty { get; init; }
+
+    public Parameters()
+    {
+        Difficulties = new() { { -1, "-Error-" } };
+        Difficulty = -1;
+    }
 }
