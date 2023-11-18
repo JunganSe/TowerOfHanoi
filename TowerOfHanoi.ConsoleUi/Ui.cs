@@ -16,15 +16,15 @@ public class Ui : IUi
         Console.CursorVisible = false;
     }
 
-    public void Initialize() // NOTE: Överflödig?
+    public void Initialize()
     {
         _outputHandler.ClearScreen();
+        _outputHandler.DrawBorders();
     }
 
     public void Draw(World world)
     {
-        _outputHandler.ClearScreen();
-        _outputHandler.DrawBorders();
+        _outputHandler.ClearTowers();
         _outputHandler.DrawTowers(world.Towers);
         _outputHandler.DrawMessages(world.Messages);
     }

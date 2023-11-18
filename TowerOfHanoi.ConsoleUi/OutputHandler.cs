@@ -30,6 +30,20 @@ internal class OutputHandler
         Console.Clear();
     }
 
+    public void ClearTowers()
+    {
+        int width = _playField.Width - 2;
+        int height = _playField.Height - 2;
+        int x = _playField.X + 1;
+        int y = _playField.Y + 1;
+        var filler = new string(' ', width);
+        for (int i = 0; i < height; i++)
+        {
+            Console.SetCursorPosition(x, y + i);
+            Console.Write(filler);
+        }
+    }
+
     public void DrawBorders()
     {
         ResetColors();
