@@ -35,9 +35,9 @@ internal class Worker
         }
     }
 
-    public int MapDifficultyToTowerHeight(int difficulty)
+    public int GetTowerHeightFromDifficulty()
     {
-        return difficulty + 2;
+        return _world.Parameters.Difficulty + 2;
     }
 
     public Tower? MapCommandToTower(InputCommand command)

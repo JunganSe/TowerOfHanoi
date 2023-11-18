@@ -11,7 +11,6 @@ public class Controller
     private readonly IUi _ui;
     private GameState _state;
 
-    public int Difficulty { get; private set; }
     public int Moves { get; private set; }
 
     public Controller(IUi ui)
@@ -29,8 +28,9 @@ public class Controller
         bool restart = true;
         while (restart)
         {
-            Difficulty = _worker.SelectDifficulty();
-            Initialize();
+            int difficulty = _worker.SelectDifficulty();
+            var parameters = new Parameters() { Difficulty = difficulty };
+            Initialize(parameters);
             MainLoop();
             // Kolla om spelaren vann eller avbröt. Om vann, gratulera och visa antal moves.
             restart = AskRestart();
@@ -38,10 +38,11 @@ public class Controller
         Quit();
     }
 
-    private void Initialize()
+    private void Initialize(Parameters parameters)
     {
+        _world.Parameters = parameters;
         _world.Messages.Clear();
-        int towerHeight = _worker.MapDifficultyToTowerHeight(Difficulty);
+        int towerHeight = _worker.GetTowerHeightFromDifficulty();
         _world.Towers.Initialize(towerHeight);
         _state = GameState.Take;
     }
