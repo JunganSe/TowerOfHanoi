@@ -35,6 +35,11 @@ public class Ui : IUi
     public int GetDifficulty(Dictionary<int, string> difficulties)
     {
         // TODO: Välja svårighetsgrad.
-        return 3;
+        return 1;
+    }
+
+    public void Quit()
+    {
+        Environment.Exit(0);
     }
 }
