@@ -40,6 +40,7 @@ public class Controller
 
     private void Initialize(Parameters parameters)
     {
+        Moves = 0;
         _world.Parameters = parameters;
         _world.Messages.Clear();
         int towerHeight = _worker.GetTowerHeightFromDifficulty();
@@ -91,10 +92,17 @@ public class Controller
                 }
 
                 _worker.MoveTowerPiece(sourceTower!, targetTower!);
+                Moves++;
                 _world.Messages.Status = $"Moved from {sourceTower!.Name} tower to {targetTower!.Name} tower.";
                 _ui.Draw(_world);
 
-                // TODO: Check for win
+                if (_worker.IsGameWon())
+                {
+                    _worker.Congratulate(Moves);
+                    _world.Messages.Instruction = "Press R to play again, or any key to quit.";
+                    _ui.Draw(_world);
+                    break;
+                }
 
                 _state = GameState.Take;
             }

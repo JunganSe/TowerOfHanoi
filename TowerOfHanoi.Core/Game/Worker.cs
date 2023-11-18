@@ -91,4 +91,23 @@ internal class Worker
         var piece = sourceTower.Pop();
         targetTower.Push(piece);
     }
+
+    public bool IsGameWon()
+    {
+        return _world.Towers.Left.IsEmpty
+            && _world.Towers.Middle.IsEmpty;
+    }
+
+    public int GetMinimumMovesToWin()
+    {
+        int towerHeight = GetTowerHeightFromDifficulty();
+        return (int)Math.Pow(2, towerHeight) - 1;
+    }
+
+    public void Congratulate(int movesUsed)
+    {
+        bool isPerfectScore = (movesUsed == GetMinimumMovesToWin());
+        _world.Messages.Status = (isPerfectScore) ? "Perfect!" : "Success!";
+        _world.Messages.Status += $" You completed the game in {movesUsed} moves on difficulty {_world.Parameters.Difficulty}.";
+    }
 }
