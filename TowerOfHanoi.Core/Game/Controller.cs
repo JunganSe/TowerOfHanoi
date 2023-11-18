@@ -10,8 +10,7 @@ public class Controller
     private readonly Worker _worker;
     private readonly IUi _ui;
     private GameState _state;
-
-    public int Moves { get; private set; }
+    private int _movesCount;
 
     public Controller(IUi ui)
     {
@@ -19,33 +18,31 @@ public class Controller
         _worker = new Worker(ui, _world);
         _ui = ui;
         _state = GameState.None;
+        _movesCount = 0;
     }
 
 
 
     public void Run()
     {
-        bool restart = true;
-        while (restart)
+        do
         {
-            int difficulty = _worker.SelectDifficulty();
-            var parameters = new Parameters() { Difficulty = difficulty };
-            Initialize(parameters);
+            Initialize();
             MainLoop();
-            // Kolla om spelaren vann eller avbröt. Om vann, gratulera och visa antal moves.
-            restart = AskRestart();
-        }
+        } while (AskRestart());
         Quit();
     }
 
-    private void Initialize(Parameters parameters)
+    private void Initialize()
     {
-        Moves = 0;
-        _world.Parameters = parameters;
+        var difficulties = _worker.CreateDifficulties();
+        int difficulty = _worker.SelectDifficulty(difficulties);
+        _world.Parameters = new Parameters() { Difficulties = difficulties, Difficulty = difficulty };
         _world.Messages.Clear();
         int towerHeight = _worker.GetTowerHeightFromDifficulty();
         _world.Towers.Initialize(towerHeight);
         _state = GameState.Take;
+        _movesCount = 0;
     }
 
     private void MainLoop()
@@ -94,13 +91,13 @@ public class Controller
                 }
 
                 _worker.MoveTowerPiece(sourceTower!, targetTower!);
-                Moves++;
+                _movesCount++;
                 _world.Messages.Status = $"Moved from {sourceTower!.Name} tower to {targetTower!.Name} tower.";
                 _ui.Draw(_world);
 
                 if (_worker.IsGameWon())
                 {
-                    _worker.Congratulate(Moves);
+                    _worker.Congratulate(_movesCount);
                     _world.Messages.Instruction = "Press R to play again, or any key to quit.";
                     _ui.Draw(_world);
                     break;

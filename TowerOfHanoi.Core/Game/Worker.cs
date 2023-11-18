@@ -17,9 +17,9 @@ internal class Worker
 
 
 
-    public int SelectDifficulty()
+    public Dictionary<int, string> CreateDifficulties()
     {
-        var difficulties = new Dictionary<int, string>()
+        return new Dictionary<int, string>()
         {
             { 1, "Child's play" },
             { 2, "Easy" },
@@ -27,10 +27,14 @@ internal class Worker
             { 4, "Hard" },
             { 5, "Kinda tedious" }
         };
+    }
+
+    public int SelectDifficulty(Dictionary<int, string> difficulties)
+    {
         while (true)
         {
             int response = _ui.GetDifficulty(difficulties);
-            if (response is >= 1 and <= 5)
+            if (difficulties.ContainsKey(response))
                 return response;
         }
     }
