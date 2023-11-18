@@ -29,8 +29,9 @@ public class Controller
         {
             Initialize();
             MainLoop();
-        } while (AskRestart());
-        Quit();
+            End();
+        } while (_worker.AskRestart());
+        _ui.Quit();
     }
 
     private void Initialize()
@@ -58,7 +59,10 @@ public class Controller
 
                 var command = _ui.GetInputCommand();
                 if (command == InputCommand.Quit)
+                {
+                    _world.Messages.Status = "";
                     return;
+                }
                 var targetTower = _worker.MapCommandToTower(command);
 
                 _worker.SetTakeFromTowerStatusMessage(targetTower);
@@ -80,7 +84,10 @@ public class Controller
 
                 var command = _ui.GetInputCommand();
                 if (command == InputCommand.Quit)
+                {
+                    _world.Messages.Status = "";
                     return;
+                }
                 var targetTower = _worker.MapCommandToTower(command);
 
                 _worker.SetMoveToTowerStatusMessage(sourceTower!, targetTower);
@@ -96,26 +103,19 @@ public class Controller
                 _ui.Draw(_world);
 
                 if (_worker.IsGameWon())
-                {
-                    _worker.Congratulate(_movesCount);
-                    _world.Messages.Instruction = "Press R to play again, or any other key to quit.";
-                    _ui.Draw(_world);
-                    break;
-                }
+                    return;
 
                 _state = GameState.Take;
             }
         }
     }
 
-    private bool AskRestart()
+    private void End()
     {
-        throw new NotImplementedException();
-    }
-
-    private void Quit()
-    {
-        // Hanteras av ui?
-        throw new NotImplementedException();
+        if (_worker.IsGameWon())
+        {
+            _worker.Congratulate(_movesCount);
+            _ui.Draw(_world);
+        }
     }
 }

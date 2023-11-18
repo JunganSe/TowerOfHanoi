@@ -9,4 +9,5 @@ public interface IUi
     public void Draw(World world);
     public InputCommand GetInputCommand();
     public int GetDifficulty(Dictionary<int, string> difficulties);
+    public void Quit();
 }
