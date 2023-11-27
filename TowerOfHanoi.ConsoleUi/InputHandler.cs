@@ -4,6 +4,17 @@ namespace TowerOfHanoi.ConsoleUi;
 
 internal class InputHandler
 {
+    public int GetNumberInput(List<int> validNumbers)
+    {
+        while (true)
+        {
+            var key = Console.ReadKey(true).KeyChar.ToString();
+            bool parseSucceeded = int.TryParse(key, out int parsedKey);
+            if (parseSucceeded && validNumbers.Contains(parsedKey))
+                return parsedKey;
+        }
+    }
+
     public InputCommand GetInputCommand()
     {
         var key = Console.ReadKey(true).Key;

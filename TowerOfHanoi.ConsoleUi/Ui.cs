@@ -29,13 +29,15 @@ public class Ui : IUi
         _outputHandler.DrawMessages(world.Messages);
     }
 
-    public InputCommand GetInputCommand() 
+    public InputCommand GetInputCommand()
         => _inputHandler.GetInputCommand();
 
     public int GetDifficulty(Dictionary<int, string> difficulties)
     {
-        // TODO: Välja svårighetsgrad.
-        return 1;
+        _outputHandler.ClearScreen();
+        _outputHandler.DrawDifficulties(difficulties);
+        var validNumbers = difficulties.Keys.ToList();
+        return _inputHandler.GetNumberInput(validNumbers);
     }
 
     public void Quit()

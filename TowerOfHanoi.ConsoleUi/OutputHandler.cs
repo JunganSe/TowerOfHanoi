@@ -30,6 +30,13 @@ internal class OutputHandler
         Console.Clear();
     }
 
+    public void DrawDifficulties(Dictionary<int, string> difficulties)
+    {
+        Console.WriteLine("Select difficulty:");
+        foreach (var d in difficulties)
+            Console.WriteLine($"{d.Key}: {d.Value}");
+    }
+
     public void ClearTowers()
     {
         int width = _playField.Width - 2;
