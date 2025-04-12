@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerOfHanoi.Core", "TowerO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerOfHanoi.ConsoleUi", "TowerOfHanoi.ConsoleUi\TowerOfHanoi.ConsoleUi.csproj", "{6C28B31E-4DEE-4FE4-8417-34D75F3BB8D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerOfHanoi.WinFormsUi", "TowerOfHanoi.WinFormsUi\TowerOfHanoi.WinFormsUi.csproj", "{B0847EB3-1CC8-4319-BA93-30D3B910F654}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6C28B31E-4DEE-4FE4-8417-34D75F3BB8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C28B31E-4DEE-4FE4-8417-34D75F3BB8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C28B31E-4DEE-4FE4-8417-34D75F3BB8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0847EB3-1CC8-4319-BA93-30D3B910F654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0847EB3-1CC8-4319-BA93-30D3B910F654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0847EB3-1CC8-4319-BA93-30D3B910F654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0847EB3-1CC8-4319-BA93-30D3B910F654}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
