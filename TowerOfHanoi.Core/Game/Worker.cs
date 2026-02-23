@@ -17,17 +17,14 @@ internal class Worker
 
 
 
-    public Dictionary<int, string> CreateDifficulties()
+    public Dictionary<int, string> CreateDifficulties() => new()
     {
-        return new Dictionary<int, string>()
-        {
-            { 1, "Child's play" },
-            { 2, "Easy" },
-            { 3, "Medium" },
-            { 4, "Hard" },
-            { 5, "Kinda tedious" }
-        };
-    }
+        { 1, "Child's play" },
+        { 2, "Easy" },
+        { 3, "Medium" },
+        { 4, "Hard" },
+        { 5, "Kinda tedious" }
+    };
 
     public int SelectDifficulty(Dictionary<int, string> difficulties)
     {
@@ -44,16 +41,13 @@ internal class Worker
         return _world.Parameters.Difficulty + 2;
     }
 
-    public Tower? MapCommandToTower(InputCommand command)
+    public Tower? MapCommandToTower(InputCommand command) => command switch
     {
-        return command switch
-        {
-            InputCommand.TowerLeft => _world.Towers.Left,
-            InputCommand.TowerMiddle => _world.Towers.Middle,
-            InputCommand.TowerRight => _world.Towers.Right,
-            _ => null
-        };
-    }
+        InputCommand.TowerLeft => _world.Towers.Left,
+        InputCommand.TowerMiddle => _world.Towers.Middle,
+        InputCommand.TowerRight => _world.Towers.Right,
+        _ => null
+    };
 
     public void SetTakeFromTowerStatusMessage(Tower? tower)
     {
@@ -106,7 +100,7 @@ internal class Worker
     public void Congratulate(int movesUsed)
     {
         bool isPerfectScore = (movesUsed == GetMinimumMovesToWin());
-        _world.Messages.Status = (isPerfectScore? "Perfect!" : "Success!")
+        _world.Messages.Status = (isPerfectScore ? "Perfect!" : "Success!")
             + $" Game completed in {movesUsed} moves on difficulty {_world.Parameters.Difficulty}.";
     }
 

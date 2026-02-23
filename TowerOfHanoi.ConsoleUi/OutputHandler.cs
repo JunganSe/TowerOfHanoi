@@ -34,7 +34,9 @@ internal class OutputHandler
     {
         Console.WriteLine("Select difficulty:");
         foreach (var d in difficulties)
+        {
             Console.WriteLine($"{d.Key}: {d.Value}");
+        }
     }
 
     public void ClearTowers()
@@ -44,6 +46,7 @@ internal class OutputHandler
         int x = _playField.X + 1;
         int y = _playField.Y + 1;
         var filler = new string(' ', width);
+
         for (int i = 0; i < height; i++)
         {
             Console.SetCursorPosition(x, y + i);
@@ -131,10 +134,9 @@ internal class OutputHandler
     {
         for (int i = 0; i < tower.Count; i++)
         {
-            if (tower.Highlight && i == tower.Count - 1)
-                Console.ForegroundColor = _highlightColor;
-            else
-                Console.ForegroundColor = _mainColor;
+            Console.ForegroundColor = (tower.Highlight && i == tower.Count - 1 )
+                ? _highlightColor
+                : _mainColor;
 
             int size = tower.Reverse().ElementAt(i).Size;
             string piece = _graphicMaker.GetTowerPiece(size);

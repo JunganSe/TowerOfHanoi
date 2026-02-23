@@ -21,22 +21,22 @@ internal class GraphicMaker
         _towerPieces = CreateTowerPieces();
     }
 
-    private string[] CreateTowerPieces() 
-        => Enumerable.Range(1, _maxTowerHeight)
+    private string[] CreateTowerPieces() =>
+        Enumerable.Range(1, _maxTowerHeight)
             .Select(i => new string(_towerPiecePart, i * 2).PadBoth(_maxTowerHeight * 2))
             .ToArray();
 
 
 
-    public string GetTowerPiece(int size) 
-        => _towerPieces[size - 1];
+    public string GetTowerPiece(int size) =>
+        _towerPieces[size - 1];
 
-    public string GetTowerFoundation() 
-        => new string(_FoundationPart, _foundationWidth);
+    public string GetTowerFoundation() =>
+        new string(_FoundationPart, _foundationWidth);
 
-    public string GetPaddedTowerName(string name) 
-        => name.PadBoth(_foundationWidth);
+    public string GetPaddedTowerName(string name) =>
+        name.PadBoth(_foundationWidth);
 
-    public string GetBorderParts()
-        => _borderParts;
+    public string GetBorderParts() =>
+        _borderParts;
 }
