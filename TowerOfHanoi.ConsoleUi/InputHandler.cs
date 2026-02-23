@@ -21,16 +21,13 @@ internal class InputHandler
         return MapConsoleKeyToInputCommand(key);
     }
 
-    private InputCommand MapConsoleKeyToInputCommand(ConsoleKey key)
+    private InputCommand MapConsoleKeyToInputCommand(ConsoleKey key) => key switch
     {
-        return key switch
-        {
-            ConsoleKey.NumPad1 => InputCommand.TowerLeft,
-            ConsoleKey.NumPad2 => InputCommand.TowerMiddle,
-            ConsoleKey.NumPad3 => InputCommand.TowerRight,
-            ConsoleKey.R => InputCommand.Restart,
-            ConsoleKey.Q => InputCommand.Quit,
-            _ => InputCommand.None
-        };
-    }
+        ConsoleKey.NumPad1 => InputCommand.TowerLeft,
+        ConsoleKey.NumPad2 => InputCommand.TowerMiddle,
+        ConsoleKey.NumPad3 => InputCommand.TowerRight,
+        ConsoleKey.R => InputCommand.Restart,
+        ConsoleKey.Q => InputCommand.Quit,
+        _ => InputCommand.None
+    };
 }
