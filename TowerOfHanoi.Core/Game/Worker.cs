@@ -57,11 +57,8 @@ internal class Worker
             _world.Messages.Status = "Can not take from an empty tower.";
     }
 
-    public bool CanTakeFromTower(Tower? tower)
-    {
-        return !(tower == null 
-            || tower.IsEmpty);
-    }
+    public bool CanTakeFromTower(Tower? tower) =>
+        tower != null && !tower.IsEmpty;
 
     public void SetMoveToTowerStatusMessage(Tower sourceTower, Tower? targetTower)
     {
@@ -73,12 +70,10 @@ internal class Worker
             _world.Messages.Status = "Must place on larger tower piece, try again.";
     }
 
-    public bool CanMoveToTower(Tower sourceTower, Tower? targetTower)
-    {
-        return !(targetTower == null
-            || sourceTower == targetTower
-            || sourceTower.TopFloorSize >= targetTower.TopFloorSize);
-    }
+    public bool CanMoveToTower(Tower sourceTower, Tower? targetTower) =>
+        targetTower != null
+        && sourceTower != targetTower
+        && sourceTower.TopFloorSize < targetTower.TopFloorSize;
 
     public void MoveTowerPiece(Tower sourceTower, Tower targetTower)
     {
